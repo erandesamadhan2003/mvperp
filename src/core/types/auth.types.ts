@@ -1,10 +1,8 @@
 export interface LoginRequest {
     AceYear: string;
-    CCode: string;
     Password: string;
     UserAccessAddress: string;
     UserName: string;
-    UserType: number;
 }
 
 export interface MenuItem {
@@ -19,7 +17,7 @@ export interface MenuItem {
     NgClass: string;
     FormLink: string;
     IsActive: boolean | null;
-    Childrens: MenuItem[] | null; 
+    Childrens: MenuItem[] | null;
 }
 
 export interface UserData {

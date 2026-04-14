@@ -8,9 +8,8 @@ import { useNewsAndAnnouncement } from "@/modules/public/home/hooks/useNewsAndAn
 const MIN_ITEMS_TO_SCROLL = 4;
 
 export function NewsAndAnnouncement() {
-    const { data, isLoading, isError } = useNewsAndAnnouncement();
+    const { data, isLoading, isError, isFetching } = useNewsAndAnnouncement();
     const announcements = data ?? [];
-
     const marqueeItems = useMemo(() => {
         if (announcements.length < MIN_ITEMS_TO_SCROLL) {
             return announcements;
@@ -24,16 +23,20 @@ export function NewsAndAnnouncement() {
         : "news-scroll-track";
 
     return (
-        <aside className="w-full max-w-100 overflow-hidden rounded-sm border border-slate-300 bg-[#f3f4f6] shadow-xl">
+        <aside className="w-full max-w-120 overflow-hidden rounded-sm border border-slate-300 bg-[#f3f4f6] shadow-xl">
             <div className="bg-[#e33f3f] px-5 py-3 text-xl font-semibold tracking-wide text-white md:text-2xl">
                 News &amp; Announcements
             </div>
 
-            <div className="h-105 overflow-hidden px-3 py-3">
-                {isLoading && (
-                    <p className="px-2 text-sm font-medium text-slate-600 md:text-base">Loading announcements...</p>
+            <div className="h-120 overflow-hidden px-3 py-3">
+                {isLoading && announcements.length === 0 && (
+                    <p className="px-2 text-sm font-medium text-slate-600 md:text-base">
+                        Loading announcements...
+                    </p>
                 )}
-
+                {isFetching && announcements.length > 0 && (
+                    <p className="text-xs text-gray-500 px-2">Refreshing...</p>
+                )}
                 {isError && (
                     <p className="px-2 text-sm font-medium text-red-600 md:text-base">
                         Unable to load announcements right now.

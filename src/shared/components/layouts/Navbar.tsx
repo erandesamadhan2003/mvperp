@@ -22,7 +22,7 @@ const navItems = [
     { label: "Help Desk", href: "/", className: "text-slate-800", icon: CircleHelp },
     { label: "Contact", href: "/", className: "text-slate-800", icon: Contact },
     { label: "Branch Info", href: "/", className: "text-slate-800", icon: GraduationCap },
-    { label: "Login Now", href: "/", className: "text-red-500", icon: LogIn },
+    { label: "Login Now", href: "/login", className: "text-red-500", icon: LogIn },
 ] as const satisfies ReadonlyArray<{
     label: string;
     href: string;
