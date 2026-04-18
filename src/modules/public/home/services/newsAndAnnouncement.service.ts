@@ -1,5 +1,5 @@
 import { api } from "@/core/api/client";
-import { NEWS_AND_ANNOUNCEMENT_URL, ORGINAZATION_INFO_URL } from "@/core/utils/constant";
+import { NEWS_AND_ANNOUNCEMENT_URL, ORGINAZATION_INFO_URL } from "@/core/utils/APIURL";
 import {
     ApiListResponse,
     NewsAndAnnouncement,

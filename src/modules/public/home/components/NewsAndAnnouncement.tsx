@@ -23,28 +23,28 @@ export function NewsAndAnnouncement() {
         : "news-scroll-track";
 
     return (
-        <aside className="w-full max-w-120 overflow-hidden rounded-sm border border-slate-300 bg-[#f3f4f6] shadow-xl">
-            <div className="bg-[#e33f3f] px-5 py-3 text-xl font-semibold tracking-wide text-white md:text-2xl">
+        <aside className="erp-surface w-full max-w-120 overflow-hidden rounded-2xl">
+            <div className="erp-topbar px-5 py-3 text-xl font-semibold tracking-wide text-white md:text-2xl">
                 News &amp; Announcements
             </div>
 
             <div className="h-120 overflow-hidden px-3 py-3">
                 {isLoading && announcements.length === 0 && (
-                    <p className="px-2 text-sm font-medium text-slate-600 md:text-base">
+                    <p className="px-2 text-sm font-medium text-(--erp-text-muted) md:text-base">
                         Loading announcements...
                     </p>
                 )}
                 {isFetching && announcements.length > 0 && (
-                    <p className="text-xs text-gray-500 px-2">Refreshing...</p>
+                    <p className="px-2 text-xs text-(--erp-text-muted)">Refreshing...</p>
                 )}
                 {isError && (
-                    <p className="px-2 text-sm font-medium text-red-600 md:text-base">
+                    <p className="px-2 text-sm font-medium text-amber-700 md:text-base">
                         Unable to load announcements right now.
                     </p>
                 )}
 
                 {!isLoading && !isError && announcements.length === 0 && (
-                    <p className="px-2 text-sm font-medium text-slate-700 md:text-base">No announcements available.</p>
+                    <p className="px-2 text-sm font-medium text-(--erp-text-muted) md:text-base">No announcements available.</p>
                 )}
 
                 {!isLoading && !isError && announcements.length > 0 && (
@@ -52,15 +52,15 @@ export function NewsAndAnnouncement() {
                         {marqueeItems.map((item, index) => (
                             <article
                                 key={`${item.ID}-${index}`}
-                                className="mb-3 border-b border-slate-300/70 pb-3 last:border-b-0"
+                                className="mb-3 border-b border-(--erp-border)/75 pb-3 last:border-b-0"
                             >
-                                <h3 className="flex items-start gap-1.5 text-sm font-semibold leading-5 text-[#d63b3b] md:text-base">
-                                    <Dot className="mt-0.5 h-4 w-4 shrink-0 text-[#2f6fab]" />
+                                <h3 className="flex items-start gap-1.5 text-sm font-semibold leading-5 text-(--erp-primary-900) md:text-base">
+                                    <Dot className="mt-0.5 h-4 w-4 shrink-0 text-(--erp-accent)" />
                                     {item.MessageHeader}
                                 </h3>
 
                                 {item.Details && (
-                                    <p className="mt-1.5 px-5 text-sm leading-6 text-slate-700 md:text-[15px]">
+                                    <p className="mt-1.5 px-5 text-sm leading-6 text-(--erp-text-muted) md:text-[15px]">
                                         {item.Details}
                                     </p>
                                 )}
@@ -70,7 +70,7 @@ export function NewsAndAnnouncement() {
                                         href={item.RefURL}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="mt-1.5 inline-block px-5 text-sm font-semibold text-blue-700 hover:underline md:text-[15px]"
+                                        className="mt-1.5 inline-block px-5 text-sm font-semibold text-(--erp-accent) hover:text-(--erp-accent-strong) hover:underline md:text-[15px]"
                                     >
                                         Read More
                                     </Link>

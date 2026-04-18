@@ -1,9 +1,5 @@
-export const API_BASE_URL = "http://mvperp.org:82/api";
-
-export const AUTH_URL = {
-    LOGIN: "/Account/GetLoginDetails",
-    REGISTER: "/Admission/Registration/StudentPreRegistrations"
+export const RoleId = {
+    Admin: 1,
+    Faculty: 4,
+    Student: 12,
 }
-
-export const ORGINAZATION_INFO_URL = "/Home/GetOrgnizationInfo";
-export const NEWS_AND_ANNOUNCEMENT_URL = "/Home/GetNewsAndAnnouncements";

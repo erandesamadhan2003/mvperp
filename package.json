@@ -12,6 +12,8 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.99.0",
     "axios": "^1.15.0",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
     "lucide-react": "^1.8.0",
     "next": "16.2.3",
     "react": "19.2.4",

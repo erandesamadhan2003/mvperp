@@ -1,21 +1,59 @@
 @import "tailwindcss";
 
+:root {
+    --erp-primary-950: #0b1d38;
+    --erp-primary-900: #12294a;
+    --erp-primary-800: #1b3b63;
+    --erp-accent: #0e7490;
+    --erp-accent-strong: #155e75;
+    --erp-warm: #b45309;
+    --erp-app-bg: #e8edf3;
+    --erp-surface: #ffffff;
+    --erp-surface-muted: #f4f7fb;
+    --erp-border: #d9e1ea;
+    --erp-text: #102338;
+    --erp-text-muted: #4e6176;
+}
+
+body {
+    background: var(--erp-app-bg);
+    color: var(--erp-text);
+    font-family: "Source Sans 3", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .timetable-blink {
     animation: timetableBlink 1.4s ease-in-out infinite;
 }
 
 @keyframes timetableBlink {
     0% {
-        color: #ef4444;
+        color: #b45309;
     }
 
     50% {
-        color: #ffffff;
+        color: #0e7490;
     }
 
     100% {
-        color: #ef4444;
+        color: #b45309;
     }
+}
+
+.erp-page-shell {
+    background:
+        radial-gradient(circle at 10% 15%, rgba(14, 116, 144, 0.12), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(180, 83, 9, 0.14), transparent 28%),
+        linear-gradient(180deg, #edf2f7 0%, #e4eaf2 100%);
+}
+
+.erp-surface {
+    border: 1px solid color-mix(in srgb, var(--erp-border) 86%, white 14%);
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    box-shadow: 0 22px 55px rgba(16, 35, 56, 0.1);
+}
+
+.erp-topbar {
+    background: linear-gradient(90deg, var(--erp-primary-950) 0%, var(--erp-primary-900) 55%, var(--erp-primary-800) 100%);
 }
 
 .news-scroll-track {

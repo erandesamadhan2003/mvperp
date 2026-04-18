@@ -65,3 +65,17 @@ export interface LoginResponse {
         UserData: UserData;
     };
 }
+
+export interface AuthSession {
+    token: string;
+    user: UserData;
+    issuedAt: number;
+    expiresAt: number;
+    academicYear?: string;
+}
+
+export interface AuthErrorDetails {
+    message: string;
+    responseCode?: number;
+    statusCode?: number;
+}
