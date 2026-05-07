@@ -172,7 +172,7 @@ function MenuNode({ item, depth, roleId, pathname, expandedIds, onToggle, onNavi
 export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const { session, isAuthenticated, logoutUser } = useAuth();
+    const { session, isAuthenticated, isHydrated, logoutUser } = useAuth();
 
     const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -200,6 +200,10 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
     }, [requiredRole, user]);
 
     useEffect(() => {
+        if (!isHydrated) {
+            return;
+        }
+
         if (!isAuthenticated || !user) {
             router.replace("/login");
             return;
@@ -208,7 +212,7 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
         if (user.RoleId !== requiredRole) {
             router.replace(getRoleRoute(user.RoleId));
         }
-    }, [isAuthenticated, requiredRole, router, user]);
+    }, [isAuthenticated, isHydrated, requiredRole, router, user]);
 
     const expandedIds = useMemo(() => {
         const activeParents = collectActiveParentIds(menuItems, pathname, requiredRole);
@@ -236,6 +240,29 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
     };
 
 
+    if (!isHydrated) {
+        return (
+            <div className="erp-page-shell min-h-screen text-(--erp-text)" suppressHydrationWarning>
+                <header className="erp-topbar sticky top-0 z-30 border-b border-white/15 shadow-[0_12px_35px_rgba(11,29,56,0.35)]">
+                    <div className="flex h-16 items-center justify-between px-3 md:px-6">
+                        <div className="flex items-center gap-2">
+                            <div className="h-10 w-10 rounded-xl border border-white/15 bg-white/10" />
+                        </div>
+                        <h1 className="text-base font-semibold tracking-wide text-white md:text-lg" suppressHydrationWarning>
+                            Authenticating...
+                        </h1>
+                    </div>
+                </header>
+                <div className="flex">
+                    <aside className="hidden h-[calc(100dvh-4rem)] w-80 flex-col border-r border-white/10 bg-(--erp-primary-900) md:flex" />
+                    <main className="w-full flex-1 p-4 md:p-6">
+                        <div className="erp-surface min-h-[calc(100vh-7.5rem)] rounded-2xl p-4 md:p-6" />
+                    </main>
+                </div>
+            </div>
+        );
+    }
+
     if (!isAuthenticated || !user) {
         return (
             <div className="erp-page-shell min-h-screen text-(--erp-text)" suppressHydrationWarning>
@@ -248,7 +275,7 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
                     </div>
                 </header>
                 <div className="flex">
-                    <aside className="hidden w-80 flex-col border-r border-white/10 bg-(--erp-primary-900) md:flex" />
+                    <aside className="hidden h-[calc(100dvh-4rem)] w-80 flex-col border-r border-white/10 bg-(--erp-primary-900) md:flex" />
                     <main className="w-full flex-1 p-4 md:p-6">
                         <div className="erp-surface min-h-[calc(100vh-7.5rem)] rounded-2xl p-4 md:p-6" />
                     </main>
@@ -279,7 +306,7 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
                 </div>
             </div>
 
-            <nav className="flex-1 overflow-y-auto bg-(--erp-primary-900)/98 px-3 py-4" aria-label="Role menu">
+            <nav className="erp-sidebar-scroll flex-1 min-h-0 overflow-y-auto overscroll-contain bg-(--erp-primary-900)/98 px-3 py-4" aria-label="Role menu">
                 <ul className="space-y-1.5">
                     {menuItems.map((menu) => (
                         <MenuNode
@@ -341,7 +368,7 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
 
             <div className="flex">
                 <aside
-                    className={`fixed inset-y-0 left-0 z-40 mt-16 flex w-80 -translate-x-full flex-col border-r border-white/10 bg-(--erp-primary-900) shadow-2xl transition-transform duration-300 md:hidden ${isMobileSidebarOpen ? "translate-x-0" : ""
+                    className={`fixed inset-y-0 left-0 z-40 mt-16 flex h-[calc(100dvh-4rem)] w-80 -translate-x-full flex-col overflow-hidden border-r border-white/10 bg-(--erp-primary-900) shadow-2xl transition-transform duration-300 md:hidden ${isMobileSidebarOpen ? "translate-x-0" : ""
                         }`}
                 >
                     {sidebarContent}
@@ -357,7 +384,7 @@ export function AppSidebarLayout({ children, requiredRole }: AppSidebarLayoutPro
                 ) : null}
 
                 <aside
-                    className={`hidden flex-col border-r border-white/10 bg-(--erp-primary-900) md:flex md:transition-all md:duration-300 ${isDesktopSidebarOpen ? "md:w-80" : "md:w-0 md:overflow-hidden md:border-r-0"
+                    className={`hidden h-[calc(100dvh-4rem)] flex-col overflow-hidden border-r border-white/10 bg-(--erp-primary-900) md:flex md:transition-all md:duration-300 ${isDesktopSidebarOpen ? "md:w-80" : "md:w-0 md:border-r-0"
                         }`}
                 >
                     {sidebarContent}

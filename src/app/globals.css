@@ -18,7 +18,7 @@
 body {
     background: var(--erp-app-bg);
     color: var(--erp-text);
-    font-family: "Source Sans 3", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .timetable-blink {
@@ -54,6 +54,31 @@ body {
 
 .erp-topbar {
     background: linear-gradient(90deg, var(--erp-primary-950) 0%, var(--erp-primary-900) 55%, var(--erp-primary-800) 100%);
+}
+
+.erp-sidebar-scroll {
+    scrollbar-color: color-mix(in srgb, var(--erp-accent) 72%, white 28%) var(--erp-primary-900);
+    scrollbar-width: thin;
+}
+
+.erp-sidebar-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.erp-sidebar-scroll::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, var(--erp-primary-950), var(--erp-primary-900));
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.erp-sidebar-scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 2px solid rgba(11, 29, 56, 0.85);
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.95), rgba(14, 116, 144, 0.92));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.erp-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(59, 130, 246, 1), rgba(20, 184, 166, 0.95));
 }
 
 .news-scroll-track {

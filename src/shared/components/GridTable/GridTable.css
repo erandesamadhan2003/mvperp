@@ -1,0 +1,298 @@
+/**
+ * Grid Table Styles
+ * Professional spreadsheet-like UI for enterprise ERP applications
+ */
+
+.grid-table-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #102338;
+    background: #ffffff;
+}
+
+.grid-table-root * {
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.grid-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Inner - scrollable area */
+.grid-table-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+/* Custom scrollbar styling */
+.grid-table-inner::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.grid-table-inner::-webkit-scrollbar-track {
+    background: #f4f7fb;
+    border-radius: 4px;
+}
+
+.grid-table-inner::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+    border: 2px solid #f4f7fb;
+}
+
+.grid-table-inner::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Rows container */
+.grid-table-rows {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.grid-table-rows.striped>div:nth-child(odd) {
+    background-color: #f8fafc;
+}
+
+/* Cell focus and editing */
+.grid-table-root [role="gridcell"]:focus {
+    outline: 2px solid #0e7490;
+    outline-offset: -2px;
+    z-index: 5;
+}
+
+.grid-table-root [role="gridcell"].editing {
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px #0e7490;
+}
+
+/* Hover effects */
+.grid-table-root [role="row"]:hover {
+    background-color: #f1f5f9;
+    transition: background-color 0.15s ease-out;
+}
+
+.grid-table-root [role="row"]:hover [role="gridcell"] {
+    background-color: inherit;
+}
+
+/* Active cell indicator */
+.grid-table-root [role="gridcell"][aria-selected="true"] {
+    background-color: #dbeafe;
+    box-shadow: inset 0 0 0 2px #0e7490;
+}
+
+/* Compact mode */
+.grid-table-root.compact [role="gridcell"] {
+    padding: 4px 8px;
+    height: 24px;
+    font-size: 12px;
+}
+
+.grid-table-root.compact [role="columnheader"] {
+    padding: 4px 8px;
+    height: 24px;
+    font-size: 12px;
+}
+
+/* Disabled row */
+[role="row"][aria-disabled="true"],
+[role="row"] [role="gridcell"][aria-readonly="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Input styling in edit mode */
+.grid-table-inner input[type="text"] {
+    font-family: 'Roboto', sans-serif;
+    font-size: inherit;
+    color: inherit;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+}
+
+.grid-table-inner input[type="text"]:focus {
+    outline: none;
+    background-color: #eff6ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .grid-table-root {
+        height: auto;
+        max-height: 600px;
+    }
+
+    .grid-table-inner {
+        max-height: calc(100vh - 200px);
+    }
+
+    .grid-table-root.compact [role="gridcell"],
+    .grid-table-root.compact [role="columnheader"] {
+        padding: 2px 4px;
+        height: 20px;
+        font-size: 11px;
+    }
+}
+
+/* Accessibility - focus visible */
+.grid-table-root [role="gridcell"]:focus-visible {
+    outline-width: 3px;
+    outline-color: #0e7490;
+}
+
+.grid-table-root [role="columnheader"]:focus-visible {
+    outline: 2px solid #0e7490;
+    outline-offset: -2px;
+}
+
+/* Animation for cell transitions */
+.grid-table-root [role="gridcell"] {
+    transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+/* Loading state */
+.grid-table-root.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Empty state */
+.grid-table-root [role="grid"]:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: #94a3b8;
+}
+
+/* Selection range highlights (future feature) */
+.grid-table-root [role="gridcell"].in-selection-range {
+    background-color: #e0f2fe;
+    border-color: #0284c7;
+}
+
+/* Column header hover effects */
+.grid-table-root [role="columnheader"]:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+.grid-table-root [role="columnheader"][aria-sort="ascending"]::after,
+.grid-table-root [role="columnheader"][aria-sort="descending"]::after {
+    margin-left: 4px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.grid-table-root [role="columnheader"][aria-sort="ascending"]::after {
+    content: ' ↑';
+}
+
+.grid-table-root [role="columnheader"][aria-sort="descending"]::after {
+    content: ' ↓';
+}
+
+/* Border styling */
+.grid-table-root [role="gridcell"],
+.grid-table-root [role="columnheader"] {
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Sticky header z-index management */
+.grid-table-root [role="columnheader"] {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* Professional borders (no outer borders on grid) */
+.grid-table-root [role="row"]:last-child [role="gridcell"] {
+    border-bottom-color: #cbd5e1;
+}
+
+/* Text alignment helpers */
+[role="gridcell"][style*="justify-center"],
+[role="columnheader"][style*="justify-center"] {
+    text-align: center;
+}
+
+[role="gridcell"][style*="justify-end"],
+[role="columnheader"][style*="justify-end"] {
+    text-align: right;
+}
+
+/* Keyboard navigation visual indicator */
+.grid-table-root [role="gridcell"]:focus::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    border: 1px solid #0e7490;
+    pointer-events: none;
+}
+
+/* Print styles */
+@media print {
+    .grid-table-inner {
+        overflow: visible;
+        height: auto;
+    }
+
+    .grid-table-root {
+        height: auto;
+        page-break-inside: avoid;
+    }
+}
+
+/* Dark mode support (future) */
+@media (prefers-color-scheme: dark) {
+    .grid-table-root {
+        background-color: #1e293b;
+        color: #f1f5f9;
+    }
+
+    .grid-table-root [role="columnheader"] {
+        background-color: #0f172a;
+        border-color: #334155;
+    }
+
+    .grid-table-inner {
+        background-color: #1e293b;
+    }
+
+    .grid-table-root [role="gridcell"] {
+        border-color: #334155;
+    }
+
+    .grid-table-root [role="row"]:hover {
+        background-color: #334155;
+    }
+}
+
+/* Performance optimization */
+.grid-table-rows {
+    contain: layout style paint;
+}
+
+[role="row"] {
+    contain: layout style;
+}

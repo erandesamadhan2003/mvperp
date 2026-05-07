@@ -8,13 +8,13 @@ type StudentLeafPageProps = {
 
 export function StudentLeafPage({ title, modulePath, children }: StudentLeafPageProps) {
     return (
-        <section className="space-y-6">
+        <section className="min-w-0 space-y-6 overflow-x-hidden">
             <div>
                 <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
                 <p className="mt-2 text-sm text-slate-600">Module: {modulePath}</p>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
+            <div className="min-w-0 rounded-lg border border-slate-200 bg-slate-50 p-6">
                 <p className="text-slate-600">
                     Content for <span className="font-semibold text-slate-900">{title}</span> will be displayed here.
                 </p>

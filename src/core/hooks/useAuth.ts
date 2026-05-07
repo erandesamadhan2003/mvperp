@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { login } from "../services/auth.service";
 import { LoginRequest } from "../types/auth.types";
 import { AuthErrorDetails, AuthSession, LoginResponse } from "../types/auth.types";
@@ -16,7 +16,13 @@ import {
 export const useAuth = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<AuthErrorDetails | null>(null);
-    const [session, setSession] = useState<AuthSession | null>(() => readStoredSession());
+    const [session, setSession] = useState<AuthSession | null>(null);
+    const [isHydrated, setIsHydrated] = useState(false);
+
+    useEffect(() => {
+        setSession(readStoredSession());
+        setIsHydrated(true);
+    }, []);
 
     const loginUser = useCallback(async (payload: LoginRequest): Promise<LoginResponse> => {
         setIsLoading(true);
@@ -55,6 +61,7 @@ export const useAuth = () => {
         error,
         session,
         isAuthenticated,
+        isHydrated,
         loginUser,
         logoutUser,
         clearError,

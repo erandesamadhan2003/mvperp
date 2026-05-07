@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 export default function StudentLayout({ children }: Readonly<{ children: ReactNode }>) {
     return (
         <AppSidebarLayout requiredRole={RoleId.Student}>
-            {children}
+            <div className="min-w-0 overflow-x-hidden">{children}</div>
         </AppSidebarLayout>
     );
 }

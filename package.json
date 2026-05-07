@@ -11,7 +11,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.99.0",
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.24",
     "axios": "^1.15.0",
+    "clsx": "^2.1.1",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "lucide-react": "^1.8.0",
